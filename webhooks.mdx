@@ -1,0 +1,98 @@
+---
+title: Webhooks
+description: Set up webhooks to automate workflows and integrate with external systems
+---
+
+## Webhook Basics
+
+Webhooks in DIGI Risinajumi allow you to receive real-time notifications about documentation events. You can trigger automated actions in external systems when pages are created, updated, or deleted.
+
+<Columns cols={3}>
+  <Card title="Page Events" icon="file-text" href="#">
+    Get notified when documentation pages change.
+  </Card>
+  <Card title="Space Events" icon="folder" href="#">
+    Monitor space creation and configuration updates.
+  </Card>
+  <Card title="User Events" icon="users" href="#">
+    Track user activity and permission changes.
+  </Card>
+</Columns>
+
+<Steps>
+  <Step title="Create Webhook" icon="plus">
+    Add a new webhook in your space settings.
+  </Step>
+  <Step title="Configure URL" icon="link">
+    Specify the endpoint URL to receive notifications.
+  </Step>
+  <Step title="Select Events" icon="bell">
+    Choose which events trigger the webhook.
+  </Step>
+  <Step title="Test & Save" icon="check">
+    Test the webhook and save your configuration.
+  </Step>
+</Steps>
+
+<Callout kind="tip">Use HTTPS URLs for webhooks to ensure secure data transmission.</Callout>
+
+<CodeGroup tabs="JSON,Example">
+  ```json
+{
+  "event": "page.updated",
+  "space": "api-docs",
+  "page": {
+    "id": "123",
+    "title": "Authentication Guide",
+    "url": "https://docs.example.com/auth"
+  },
+  "user": {
+    "id": "456",
+    "name": "John Doe"
+  },
+  "timestamp": "2024-01-15T10:30:00Z"
+}
+  ```
+  ```json
+{
+  "event": "space.created",
+  "space": {
+    "id": "789",
+    "name": "New Project Docs",
+    "description": "Documentation for new project"
+  },
+  "user": {
+    "id": "456",
+    "name": "Jane Smith"
+  },
+  "timestamp": "2024-01-15T11:00:00Z"
+}
+  ```
+</CodeGroup>
+
+<Expandable title="Event Types" default-open="false">
+  Available events include page.created, page.updated, page.deleted, space.created, space.updated, user.invited, and comment.added. Each event includes relevant data in the payload.
+</Expandable>
+
+<ExpandableGroup>
+  <Expandable title="Security" default-open="false">
+    Webhooks can include HMAC signatures for verification. Configure a secret key to sign payloads and verify authenticity on your endpoint.
+  </Expandable>
+  <Expandable title="Retry Logic" default-open="false">
+    DIGI Risinajumi automatically retries failed webhook deliveries with exponential backoff. Configure retry limits and timeouts in your settings.
+  </Expandable>
+</ExpandableGroup>
+
+Webhooks enable powerful automation workflows. For example, you can automatically update external systems when API documentation changes, trigger builds when guides are updated, or send notifications to Slack when new pages are published.
+
+The platform supports webhook filtering to reduce noise. You can filter events by space, user, or page type. This ensures you only receive notifications for events that matter to your integration.
+
+Webhook logs provide visibility into delivery status and response times. You can view successful deliveries, failures, and retry attempts in the webhook management interface.
+
+For high-traffic documentation sites, DIGI Risinajumi offers webhook batching. Multiple events can be grouped into a single payload to reduce the number of HTTP requests.
+
+Custom headers can be added to webhook requests for authentication or metadata. This allows you to pass API keys or other credentials securely.
+
+DIGI Risinajumi provides webhook testing tools. You can send test events to verify your endpoint is working correctly before enabling the webhook for production use.
+
+The webhook system is designed to be reliable and scalable. It uses message queues to handle high volumes and includes monitoring to alert you of delivery issues.

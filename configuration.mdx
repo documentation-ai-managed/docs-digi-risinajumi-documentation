@@ -1,0 +1,96 @@
+---
+title: Configuration
+description: Configure DIGI Risinajumi settings and customize your documentation space
+---
+
+## Configuration Overview
+
+DIGI Risinajumi offers extensive configuration options to customize your documentation experience. You can configure spaces, themes, integrations, and user permissions to match your organization's needs.
+
+<Columns cols={2}>
+  <Card title="Space Settings" icon="settings" href="#">
+    Configure documentation spaces with custom domains and branding.
+  </Card>
+  <Card title="User Management" icon="users" href="#">
+    Manage team members, roles, and permissions.
+  </Card>
+</Columns>
+
+<Steps>
+  <Step title="Access Settings" icon="settings">
+    Navigate to the settings panel in your dashboard.
+  </Step>
+  <Step title="Configure Basics" icon="tool">
+    Set up your organization name and basic preferences.
+  </Step>
+  <Step title="Customize Theme" icon="palette">
+    Choose colors and branding elements.
+  </Step>
+  <Step title="Set Permissions" icon="shield">
+    Define user roles and access levels.
+  </Step>
+</Steps>
+
+<Callout kind="info">Configuration changes are applied immediately and affect all users in your organization.</Callout>
+
+<Tabs>
+  <Tab title="General" icon="settings">
+    Basic settings like organization name and default language.
+  </Tab>
+  <Tab title="Security" icon="lock">
+    Authentication settings and access controls.
+  </Tab>
+  <Tab title="Integrations" icon="plug">
+    Connect external tools and services.
+  </Tab>
+</Tabs>
+
+<CodeGroup tabs="JSON,YAML">
+  ```json
+{
+  "organization": "My Company",
+  "theme": {
+    "primaryColor": "#3B82F6",
+    "logo": "https://example.com/logo.png"
+  },
+  "permissions": {
+    "defaultRole": "editor"
+  }
+}
+  ```
+  ```yaml
+organization: My Company
+theme:
+  primaryColor: '#3B82F6'
+  logo: https://example.com/logo.png
+permissions:
+  defaultRole: editor
+  ```
+</CodeGroup>
+
+<Expandable title="Advanced Configuration" default-open="false">
+  For advanced users, DIGI Risinajumi supports configuration via API and CLI. You can automate configuration management and integrate it into your deployment pipelines.
+</Expandable>
+
+<ExpandableGroup>
+  <Expandable title="Theme Customization" default-open="false">
+    Customize the appearance of your documentation with CSS variables and custom fonts. You can upload logos, set color schemes, and adjust typography to match your brand guidelines.
+  </Expandable>
+  <Expandable title="Webhook Configuration" default-open="false">
+    Set up webhooks to receive notifications about documentation changes. Configure endpoints, authentication, and event filters to automate workflows.
+  </Expandable>
+</ExpandableGroup>
+
+DIGI Risinajumi supports multiple configuration levels: global (organization-wide), space-specific, and user preferences. Global settings affect all spaces, while space settings allow customization per documentation project. User preferences let individual team members personalize their experience.
+
+The platform includes configuration validation to prevent errors. When you save settings, DIGI Risinajumi checks for conflicts and provides helpful error messages. You can preview changes before applying them to avoid disrupting your team's workflow.
+
+For large organizations, DIGI Risinajumi offers enterprise configuration options including LDAP integration, custom domains, and advanced security settings. These features ensure the platform scales with your needs while maintaining security and compliance.
+
+Configuration backups are automatically created and can be restored if needed. You can export your configuration as code, making it easy to version control and replicate settings across environments.
+
+The platform provides configuration templates for common use cases. Choose from templates for API documentation, product guides, or knowledge bases to get started quickly with pre-configured settings.
+
+DIGI Risinajumi's configuration system is designed to be flexible yet secure. Administrators have fine-grained control over what settings can be modified by different user roles, preventing unauthorized changes.
+
+To troubleshoot configuration issues, use the built-in diagnostics tool. It checks your settings for common problems and provides recommendations for optimization.

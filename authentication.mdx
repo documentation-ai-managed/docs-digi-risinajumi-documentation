@@ -1,0 +1,80 @@
+---
+title: Authentication
+description: Learn how to authenticate and authorize access to DIGI Risinajumi
+---
+
+## Authentication Methods
+
+DIGI Risinajumi supports multiple authentication methods to ensure secure access to your documentation. You can use API keys for programmatic access, OAuth for third-party integrations, or SAML for enterprise single sign-on.
+
+<Tabs>
+  <Tab title="API Keys" icon="key">
+    Use API keys for direct API access and CLI tools.
+  </Tab>
+  <Tab title="OAuth" icon="lock">
+    Integrate with OAuth providers like GitHub and Google.
+  </Tab>
+  <Tab title="SAML" icon="shield">
+    Enterprise single sign-on with SAML 2.0.
+  </Tab>
+</Tabs>
+
+<Steps>
+  <Step title="Generate API Key" icon="key">
+    Go to your account settings and generate a new API key.
+  </Step>
+  <Step title="Configure Permissions" icon="settings">
+    Set the appropriate permissions for your API key.
+  </Step>
+  <Step title="Use in Requests" icon="send">
+    Include the API key in your request headers.
+  </Step>
+</Steps>
+
+<Callout kind="tip">Always store API keys securely and rotate them regularly for security.</Callout>
+
+<CodeGroup tabs="cURL,Python,Node.js">
+  ```bash
+curl -H "Authorization: Bearer YOUR_API_KEY" https://api.digirisinajumi.com/v1/documents
+  ```
+  ```python
+import requests
+
+response = requests.get('https://api.digirisinajumi.com/v1/documents', 
+                        headers={'Authorization': 'Bearer YOUR_API_KEY'})
+  ```
+  ```javascript
+const response = await fetch('https://api.digirisinajumi.com/v1/documents', {
+  headers: {
+    'Authorization': 'Bearer YOUR_API_KEY'
+  }
+});
+  ```
+</CodeGroup>
+
+<Expandable title="OAuth Setup" default-open="false">
+  To set up OAuth authentication, register your application with the OAuth provider and configure the callback URL to point to your DIGI Risinajumi instance. The platform supports standard OAuth 2.0 flows including authorization code and implicit grant types.
+</Expandable>
+
+<ExpandableGroup>
+  <Expandable title="API Key Security" default-open="false">
+    API keys should be treated like passwords. Never commit them to version control or share them in public forums. Use environment variables or secure credential stores to manage API keys in your applications.
+  </Expandable>
+  <Expandable title="Token Expiration" default-open="false">
+    API tokens can be configured to expire automatically. Set appropriate expiration times based on your security requirements, and implement token refresh mechanisms for long-running applications.
+  </Expandable>
+</ExpandableGroup>
+
+Authentication is required for all API operations and most web interface actions. The platform uses role-based access control (RBAC) to manage permissions at the organization, space, and page levels. You can create custom roles with specific permissions or use built-in roles like Viewer, Editor, and Admin.
+
+For enterprise deployments, DIGI Risinajumi integrates with identity providers like Okta, Azure AD, and Auth0. This allows you to leverage existing user directories and single sign-on capabilities. SAML assertions are validated against configured identity providers to ensure secure authentication.
+
+The platform logs all authentication attempts and provides audit trails for compliance purposes. You can monitor login activity, failed attempts, and suspicious behavior through the admin dashboard. Rate limiting is applied to prevent brute force attacks and protect against abuse.
+
+When implementing authentication in your applications, consider using secure HTTPS connections and implementing proper error handling for authentication failures. DIGI Risinajumi returns standard HTTP status codes (401 for unauthorized, 403 for forbidden) to indicate authentication and authorization issues.
+
+For development and testing, you can use sandbox environments with mock authentication. This allows you to build and test integrations without affecting production data. Sandbox tokens are clearly marked and have limited permissions to prevent accidental data modification.
+
+DIGI Risinajumi supports multi-factor authentication (MFA) for additional security. Users can enable MFA through authenticator apps or hardware security keys. This adds an extra layer of protection beyond passwords and API keys.
+
+The authentication system is designed to be extensible, allowing custom authentication providers and workflows. Contact support if you need specialized authentication requirements for your organization.
